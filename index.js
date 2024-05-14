@@ -1,17 +1,17 @@
-function pathSum(root, sum) {
-  if (!root) return [];
-  const result = [];
-  const path = [];
-  const traverse = (node, sum) => {
-    if (!node) return;
-    path.push(node.val);
-    if (!node.left && !node.right && sum === node.val) {
-      result.push([...path]);
-    }
-    traverse(node.left, sum - node.val);
-    traverse(node.right, sum - node.val);
-    path.pop();
-  };
-  traverse(root, sum);
-  return result;
+function isIsomorphic(s, t) {
+  if (s.length !== t.length) return false;
+  const sMap = new Map();
+  const tMap = new Map();
+  for (let i = 0; i < s.length; i++) {
+    const sChar = s[i];
+    const tChar = t[i];
+    if (
+      (sMap.has(sChar) && sMap.get(sChar) !== tChar) ||
+      (tMap.has(tChar) && tMap.get(tChar) !== sChar)
+    )
+      return false;
+    sMap.set(sChar, tChar);
+    tMap.set(tChar, sChar);
+  }
+  return true;
 }
